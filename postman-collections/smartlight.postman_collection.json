@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "6566232a-90ba-4fae-ad28-88a63ac76be9",
+		"name": "smartlight",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:10000/lamp/all",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:10000/lamp/all",
+					"host": [
+						"localhost"
+					],
+					"port": "10000",
+					"path": [
+						"lamp",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:10000/lamp/get/1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:10000/lamp/get/1",
+					"host": [
+						"localhost"
+					],
+					"port": "10000",
+					"path": [
+						"lamp",
+						"get",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:10000/lamp/add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Bathroom\",\r\n    \"total_lamp\": 1,\r\n    \"total_power\": 5,\r\n    \"image_name\": \"lamps/lamp-3.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:10000/lamp/add",
+					"host": [
+						"localhost"
+					],
+					"port": "10000",
+					"path": [
+						"lamp",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
