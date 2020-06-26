@@ -6,7 +6,7 @@ import (
 )
 
 type Lamp struct {
-	ID         int    `json:"id,omitempty" db:"id"`
+	ID         int    `json:"id" db:"id"`
 	Name       string `json:"name" db:"name"`
 	TotalLamp  int    `json:"total_lamp" db:"total_lamp"`
 	TotalPower int    `json:"total_power" db:"total_power"`
@@ -32,7 +32,7 @@ func GetLamps(db *sql.DB) ([]Lamp, error) {
 	defer rows.Close()
 	if err != nil {
 		log.Print("failed to query lamps")
-		return lamps, err
+		return nil, err
 	}
 
 	for rows.Next() {
@@ -46,7 +46,7 @@ func GetLamps(db *sql.DB) ([]Lamp, error) {
 
 	if err := rows.Err(); err != nil {
 		log.Print("failed to read lamps")
-		return lamps, err
+		return nil, err
 	}
 
 	return lamps, nil
