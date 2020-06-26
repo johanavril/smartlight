@@ -6,71 +6,207 @@
 	},
 	"item": [
 		{
-			"name": "localhost:10000/lamp/all",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "localhost:10000/lamp/all",
-					"host": [
-						"localhost"
-					],
-					"port": "10000",
-					"path": [
-						"lamp",
-						"all"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost:10000/lamp/get/1",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "localhost:10000/lamp/get/1",
-					"host": [
-						"localhost"
-					],
-					"port": "10000",
-					"path": [
-						"lamp",
-						"get",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost:10000/lamp/add",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Bathroom\",\r\n    \"total_lamp\": 1,\r\n    \"total_power\": 5,\r\n    \"image_name\": \"lamps/lamp-3.jpg\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Lamp",
+			"item": [
+				{
+					"name": "Get All Lamp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:10000/lamp/all",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"lamp",
+								"all"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "localhost:10000/lamp/add",
-					"host": [
-						"localhost"
-					],
-					"port": "10000",
-					"path": [
-						"lamp",
-						"add"
-					]
+				{
+					"name": "Get Lamp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:10000/lamp/get/1",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"lamp",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Lamp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Bathroom\",\r\n    \"total_lamp\": 1,\r\n    \"total_power\": 5,\r\n    \"image_name\": \"lamps/lamp-3.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:10000/lamp/add",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"lamp",
+								"add"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Schedule",
+			"item": [
+				{
+					"name": "Add Schedule",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lamp_id\": 1,\r\n    \"name\": \"living room morning turn on\",\r\n    \"time\": \"05:00\",\r\n    \"turn_on\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:10000/schedule/add",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"schedule",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Lamp Schedules",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:10000/schedule/get/1",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"schedule",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Schedules",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:10000/schedule/all",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"schedule",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Schedule",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"living room morning turn off\",\r\n    \"time\": \"07:00\",\r\n    \"turn_on\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:10000/schedule/edit",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"schedule",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Schedule",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:10000/schedule/remove/1",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"schedule",
+								"remove",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}
