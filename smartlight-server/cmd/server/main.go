@@ -22,12 +22,20 @@ func main() {
 	defer connection.DB.Close()
 
 	router := httprouter.New()
-	router.POST("/lamp/get/:id", getLampHandler)
-	router.POST("/lamp/all", getLampsHandler)
-	router.POST("/lamp/add", addLampHandler)
 	router.GET("/ping", func(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 		fmt.Fprint(w, "pong")
 	})
+
+	router.POST("/lamp/get/:id", getLampHandler)
+	router.POST("/lamp/all", getLampsHandler)
+	router.POST("/lamp/add", addLampHandler)
+
+	router.POST("/schedule/get/:lamp-id", getLampSchedulesHandler)
+	router.POST("/schedule/all", getAllSchedulesHandler)
+	router.POST("/schedule/add", addScheduleHandler)
+	router.POST("/schedule/remove/:id", removeScheduleHandler)
+	router.POST("/schedule/edit", editScheduleHandler)
+
 	fmt.Println("Up and running")
 	http.ListenAndServe(":10000", router)
 }
