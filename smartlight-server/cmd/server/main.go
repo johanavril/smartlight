@@ -36,6 +36,11 @@ func main() {
 	router.POST("/schedule/remove/:id", removeScheduleHandler)
 	router.POST("/schedule/edit", editScheduleHandler)
 
+	router.POST("/setting/all", getAllSettingsHandler)
+	router.POST("/setting/add", addSettingHandler)
+	router.POST("/setting/remove/:id", removeSettingHandler)
+	router.POST("/setting/edit", editSettingHandler)
+
 	fmt.Println("Up and running")
 	http.ListenAndServe(":10000", router)
 }
