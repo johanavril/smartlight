@@ -14,7 +14,7 @@ type Schedule struct {
 }
 
 func GetLampSchedules(db *sql.DB, lampID int) ([]Schedule, error) {
-	var schedules []Schedule
+	schedules := []Schedule{}
 	query := "SELECT id, lamp_id, name, time, turn_on FROM schedules WHERE lamp_id = $1"
 	rows, err := db.Query(query, lampID)
 	if err != nil {
@@ -40,7 +40,7 @@ func GetLampSchedules(db *sql.DB, lampID int) ([]Schedule, error) {
 }
 
 func GetAllSchedules(db *sql.DB) ([]Schedule, error) {
-	var schedules []Schedule
+	schedules := []Schedule{}
 	query := "SELECT id, lamp_id, name, time, turn_on FROM schedules"
 	rows, err := db.Query(query)
 	if err != nil {

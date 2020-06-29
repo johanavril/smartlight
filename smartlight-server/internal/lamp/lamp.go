@@ -26,7 +26,7 @@ func GetLamp(db *sql.DB, id int) (Lamp, error) {
 }
 
 func GetLamps(db *sql.DB) ([]Lamp, error) {
-	var lamps []Lamp
+	lamps := []Lamp{}
 	query := "SELECT id, name, total_lamp, total_power, image_name FROM lamps"
 	rows, err := db.Query(query)
 	defer rows.Close()
