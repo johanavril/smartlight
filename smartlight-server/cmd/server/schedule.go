@@ -42,13 +42,6 @@ func getAllSchedulesHandler(w http.ResponseWriter, req *http.Request, _ httprout
 		return
 	}
 
-	if err != nil {
-		log.Printf("failed to marshal schedules: %v", err)
-		msg := Message{"failed to build response"}
-		json.NewEncoder(w).Encode(msg)
-		return
-	}
-
 	json.NewEncoder(w).Encode(schedules)
 }
 

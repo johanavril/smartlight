@@ -42,13 +42,6 @@ func getLampsHandler(w http.ResponseWriter, req *http.Request, _ httprouter.Para
 		return
 	}
 
-	if err != nil {
-		log.Printf("failed to marshal lamps: %v", err)
-		msg := Message{"failed to build response"}
-		json.NewEncoder(w).Encode(msg)
-		return
-	}
-
 	json.NewEncoder(w).Encode(lamps)
 }
 
