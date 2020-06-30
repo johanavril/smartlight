@@ -9,6 +9,7 @@ require (
 	internal/lamp v0.0.0
 	internal/schedule v0.0.0
 	internal/setting v0.0.0
+	internal/usage v0.0.0
 )
 
 replace internal/connection => ./../../internal/connection
@@ -18,3 +19,5 @@ replace internal/lamp => ./../../internal/lamp
 replace internal/schedule => ./../../internal/schedule
 
 replace internal/setting => ./../../internal/setting
+
+replace internal/usage => ./../../internal/usage

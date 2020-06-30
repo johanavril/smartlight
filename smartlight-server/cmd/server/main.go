@@ -41,6 +41,10 @@ func main() {
 	router.POST("/setting/remove/:id", removeSettingHandler)
 	router.POST("/setting/edit", editSettingHandler)
 
+	router.POST("/usage/get/:lamp-id", getLampUsagesHandler)
+	router.POST("/usage/all", getAllUsagesHandler)
+	router.POST("/usage/add", addUsageHandler)
+
 	fmt.Println("Up and running")
 	http.ListenAndServe(":10000", router)
 }
