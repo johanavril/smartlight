@@ -32,7 +32,7 @@ func GetLampSchedules(db *sql.DB, lampID int) ([]Schedule, error) {
 	}
 
 	if err := rows.Err(); err != nil {
-		log.Print("failed to read schedule for lamp_id=%d", lampID)
+		log.Printf("failed to read schedule for lamp_id=%d", lampID)
 		return nil, err
 	}
 
