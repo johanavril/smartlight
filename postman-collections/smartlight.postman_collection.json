@@ -207,6 +207,180 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Setting",
+			"item": [
+				{
+					"name": "Get All Settings",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:10000/setting/all",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"setting",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Setting",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"ENC01\",\r\n    \"name\": \"Energy Conservation\",\r\n    \"interval\": 30,\r\n    \"checked\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:10000/setting/edit",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"setting",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Setting",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:10000/setting/remove/ENC01",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"setting",
+								"remove",
+								"ENC01"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Setting",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"ENC01\",\r\n    \"name\": \"Energy Conservation\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:10000/setting/add",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"setting",
+								"add"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Usage",
+			"item": [
+				{
+					"name": "Add Usage",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lamp_id\": 1,\r\n    \"time\": \"2020-06-01T05:00:00Z\",\r\n    \"turn_on\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:10000/usage/add",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"usage",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Lamp Usages",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:10000/usage/get/1",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"usage",
+								"get",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Usages",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:10000/usage/all",
+							"host": [
+								"localhost"
+							],
+							"port": "10000",
+							"path": [
+								"usage",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}
