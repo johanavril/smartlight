@@ -16,6 +16,7 @@ func getAllSettingsHandler(w http.ResponseWriter, req *http.Request, _ httproute
 	if err != nil {
 		log.Printf("failed to get all setting from database: %v", err)
 		msg := Message{"failed to get all settings from database"}
+		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(msg)
 		return
 	}
@@ -31,6 +32,7 @@ func addSettingHandler(w http.ResponseWriter, req *http.Request, _ httprouter.Pa
 	if err != nil {
 		log.Printf("failed to insert setting: %v", err)
 		msg := Message{"failed to insert setting"}
+		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(msg)
 		return
 	}
@@ -44,6 +46,7 @@ func removeSettingHandler(w http.ResponseWriter, req *http.Request, ps httproute
 	if err != nil {
 		log.Printf("failed to delete setting: %v", err)
 		msg := Message{"failed to delete setting"}
+		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(msg)
 		return
 	}
@@ -60,6 +63,7 @@ func editSettingHandler(w http.ResponseWriter, req *http.Request, _ httprouter.P
 	if err != nil {
 		log.Printf("failed to update setting: %v", err)
 		msg := Message{"failed to update setting"}
+		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(msg)
 		return
 	}

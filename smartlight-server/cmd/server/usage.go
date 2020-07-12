@@ -18,6 +18,7 @@ func getLampUsagesHandler(w http.ResponseWriter, req *http.Request, ps httproute
 	if err != nil {
 		log.Printf("failed to get usage for lamp id=%s from database: %v", id, err)
 		msg := Message{"failed to get usage(s) from database"}
+		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(msg)
 		return
 	}
@@ -31,6 +32,7 @@ func getAllUsagesHandler(w http.ResponseWriter, req *http.Request, _ httprouter.
 	if err != nil {
 		log.Printf("failed to get all usages from database: %v", err)
 		msg := Message{"failed to get all usages from database"}
+		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(msg)
 		return
 	}
@@ -46,6 +48,7 @@ func addUsageHandler(w http.ResponseWriter, req *http.Request, _ httprouter.Para
 	if err != nil {
 		log.Printf("failed to insert usage: %v", err)
 		msg := Message{"failed to insert usage"}
+		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(msg)
 		return
 	}
