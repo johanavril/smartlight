@@ -6,19 +6,19 @@ import (
 )
 
 type Lamp struct {
-	ID         int    `json:"id" db:"id"`
+	ID         string `json:"id" db:"id"`
 	Name       string `json:"name" db:"name"`
 	TotalLamp  int    `json:"total_lamp" db:"total_lamp"`
 	TotalPower int    `json:"total_power" db:"total_power"`
 	ImageName  string `json:"image_name" db:"image_name"`
 }
 
-func GetLamp(db *sql.DB, id int) (Lamp, error) {
+func GetLamp(db *sql.DB, id string) (Lamp, error) {
 	var l Lamp
 	query := "SELECT id, name, total_lamp, total_power, image_name FROM lamps WHERE id = $1"
 	err := db.QueryRow(query, id).Scan(&l.ID, &l.Name, &l.TotalLamp, &l.TotalPower, &l.ImageName)
 	if err != nil {
-		log.Printf("failed to get lamp id=%d", id)
+		log.Printf("failed to get lamp id=%s", id)
 		return l, err
 	}
 
@@ -53,8 +53,8 @@ func GetLamps(db *sql.DB) ([]Lamp, error) {
 }
 
 func InsertLamp(db *sql.DB, lamp Lamp) error {
-	query := "INSERT INTO lamps(name, total_lamp, total_power, image_name) VALUES($1, $2, $3, $4)"
-	_, err := db.Exec(query, lamp.Name, lamp.TotalLamp, lamp.TotalPower, lamp.ImageName)
+	query := "INSERT INTO lamps(id, name, total_lamp, total_power, image_name) VALUES($1, $2, $3, $4, $5)"
+	_, err := db.Exec(query, lamp.ID, lamp.Name, lamp.TotalLamp, lamp.TotalPower, lamp.ImageName)
 	if err != nil {
 		log.Printf("failed to insert lamp %+v", lamp)
 		return err

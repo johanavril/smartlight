@@ -8,17 +8,17 @@ import (
 
 type Usage struct {
 	ID     int       `json:"id" db:"id"`
-	LampID int       `json:"lamp_id" db:"lamp_id"`
+	LampID string    `json:"lamp_id" db:"lamp_id"`
 	Time   time.Time `json:"time" db:"time"`
 	TurnOn bool      `json:"turn_on" db:"turn_on"`
 }
 
-func GetLampUsages(db *sql.DB, lampID int) ([]Usage, error) {
+func GetLampUsages(db *sql.DB, lampID string) ([]Usage, error) {
 	usages := []Usage{}
 	query := "SELECT id, lamp_id, time, turn_on FROM usages WHERE lamp_id = $1"
 	rows, err := db.Query(query, lampID)
 	if err != nil {
-		log.Printf("failed to get usage for lamp_id=%d", lampID)
+		log.Printf("failed to get usage for lamp_id=%s", lampID)
 		return nil, err
 	}
 
@@ -32,7 +32,7 @@ func GetLampUsages(db *sql.DB, lampID int) ([]Usage, error) {
 	}
 
 	if err := rows.Err(); err != nil {
-		log.Printf("failed to read usage for lamp_id=%d", lampID)
+		log.Printf("failed to read usage for lamp_id=%s", lampID)
 		return nil, err
 	}
 

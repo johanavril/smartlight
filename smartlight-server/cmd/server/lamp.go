@@ -6,24 +6,17 @@ import (
 	"internal/lamp"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/julienschmidt/httprouter"
 )
 
 func getLampHandler(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	w.Header().Set("Content-Type", "application/json")
-	id, err := strconv.Atoi(ps.ByName("id"))
-	if err != nil {
-		log.Printf("invalid lamp id: %v", err)
-		msg := Message{"invalid lamp id"}
-		json.NewEncoder(w).Encode(msg)
-		return
-	}
+	id := ps.ByName("id")
 
 	l, err := lamp.GetLamp(connection.DB, id)
 	if err != nil {
-		log.Printf("failed to get lamp id=%d from database: %v", id, err)
+		log.Printf("failed to get lamp id=%s from database: %v", id, err)
 		msg := Message{"failed to get data from database"}
 		json.NewEncoder(w).Encode(msg)
 		return

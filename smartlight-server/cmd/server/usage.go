@@ -6,24 +6,17 @@ import (
 	"internal/usage"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/julienschmidt/httprouter"
 )
 
 func getLampUsagesHandler(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	w.Header().Set("Content-Type", "application/json")
-	id, err := strconv.Atoi(ps.ByName("lamp-id"))
-	if err != nil {
-		log.Printf("invalid lamp id: %v", err)
-		msg := Message{"invalid lamp id"}
-		json.NewEncoder(w).Encode(msg)
-		return
-	}
+	id := ps.ByName("lamp-id")
 
 	usages, err := usage.GetLampUsages(connection.DB, id)
 	if err != nil {
-		log.Printf("failed to get usage for lamp id=%d from database: %v", id, err)
+		log.Printf("failed to get usage for lamp id=%s from database: %v", id, err)
 		msg := Message{"failed to get usage(s) from database"}
 		json.NewEncoder(w).Encode(msg)
 		return

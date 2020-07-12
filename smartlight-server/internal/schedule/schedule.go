@@ -7,18 +7,18 @@ import (
 
 type Schedule struct {
 	ID     int    `json:"id" db:"id"`
-	LampID int    `json:"lamp_id" db:"lamp_id"`
+	LampID string `json:"lamp_id" db:"lamp_id"`
 	Name   string `json:"name" db:"name"`
 	Time   string `json:"time" db:"time"`
 	TurnOn bool   `json:"turn_on" db:"turn_on"`
 }
 
-func GetLampSchedules(db *sql.DB, lampID int) ([]Schedule, error) {
+func GetLampSchedules(db *sql.DB, lampID string) ([]Schedule, error) {
 	schedules := []Schedule{}
 	query := "SELECT id, lamp_id, name, time, turn_on FROM schedules WHERE lamp_id = $1"
 	rows, err := db.Query(query, lampID)
 	if err != nil {
-		log.Printf("failed to get schedule for lamp_id=%d", lampID)
+		log.Printf("failed to get schedule for lamp_id=%s", lampID)
 		return nil, err
 	}
 
@@ -32,7 +32,7 @@ func GetLampSchedules(db *sql.DB, lampID int) ([]Schedule, error) {
 	}
 
 	if err := rows.Err(); err != nil {
-		log.Printf("failed to read schedule for lamp_id=%d", lampID)
+		log.Printf("failed to read schedule for lamp_id=%s", lampID)
 		return nil, err
 	}
 
