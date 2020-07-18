@@ -54,6 +54,15 @@ func addScheduleHandler(w http.ResponseWriter, req *http.Request, _ httprouter.P
 		return
 	}
 
+	err = schedule.ScheduleBot(connection.DB, s, botIDAddress)
+	if err != nil {
+		log.Printf("failed to schedule bot: %v", err)
+		msg := Message{"failed to schedule bot"}
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(msg)
+		return
+	}
+
 	msg := Message{"insert schedule success"}
 	json.NewEncoder(w).Encode(msg)
 }
@@ -64,6 +73,15 @@ func removeScheduleHandler(w http.ResponseWriter, req *http.Request, ps httprout
 		log.Printf("invalid schedule id: %v", err)
 		msg := Message{"invalid schedule id"}
 		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(msg)
+		return
+	}
+
+	err = schedule.UnscheduleBot(connection.DB, id, botIDAddress)
+	if err != nil {
+		log.Printf("failed to unschedule bot: %v", err)
+		msg := Message{"failed to unschedule bot"}
+		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(msg)
 		return
 	}
@@ -85,7 +103,16 @@ func editScheduleHandler(w http.ResponseWriter, req *http.Request, _ httprouter.
 	var s schedule.Schedule
 	json.NewDecoder(req.Body).Decode(&s)
 
-	err := schedule.UpdateSchedule(connection.DB, s)
+	err := schedule.RescheduleBot(s, botIDAddress)
+	if err != nil {
+		log.Printf("failed to reschedule bot: %v", err)
+		msg := Message{"failed to reschedule bot"}
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(msg)
+		return
+	}
+
+	err = schedule.UpdateSchedule(connection.DB, s)
 	if err != nil {
 		log.Printf("failed to update schedule: %v", err)
 		msg := Message{"failed to update schedule"}
