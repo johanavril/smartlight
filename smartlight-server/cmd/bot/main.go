@@ -24,8 +24,8 @@ func main() {
 	router := httprouter.New()
 	scheduler = gocron.NewScheduler(time.UTC)
 
-	lampID := os.Getenv("LAMP_ID")
-	botName := fmt.Sprintf("Lamp Bot %s", lampID)
+	botID := os.Getenv("BOT_ID")
+	botName := fmt.Sprintf("Lamp Bot %s", botID)
 	port := fmt.Sprintf(":%d", 10001)
 
 	r := raspi.NewAdaptor()
@@ -36,10 +36,10 @@ func main() {
 
 	// format lamp_id = BOT_ID:RELAY_CHANNEL
 	// change the RELAY_CHANNEL value according to the intended channel to be controlled
-	relays[fmt.Sprintf("%s:%d", lampID, 1)] = in1
-	relays[fmt.Sprintf("%s:%d", lampID, 2)] = in2
-	relays[fmt.Sprintf("%s:%d", lampID, 3)] = in3
-	relays[fmt.Sprintf("%s:%d", lampID, 4)] = in4
+	relays[fmt.Sprintf("%s:%d", botID, 1)] = in1
+	relays[fmt.Sprintf("%s:%d", botID, 2)] = in2
+	relays[fmt.Sprintf("%s:%d", botID, 3)] = in3
+	relays[fmt.Sprintf("%s:%d", botID, 4)] = in4
 
 	work := func() {
 		gobot.Every(5*time.Minute, func() {
