@@ -37,12 +37,17 @@ func addSettingHandler(w http.ResponseWriter, req *http.Request, _ httprouter.Pa
 		return
 	}
 
+	setting.SetSetting(s, botIDAddress)
+
 	msg := Message{"insert setting success"}
 	json.NewEncoder(w).Encode(msg)
 }
 
 func removeSettingHandler(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
-	err := setting.DeleteSetting(connection.DB, ps.ByName("id"))
+	s, err := setting.GetSetting(connection.DB, ps.ByName("id"))
+	setting.SetSetting(s, botIDAddress)
+
+	err = setting.DeleteSetting(connection.DB, ps.ByName("id"))
 	if err != nil {
 		log.Printf("failed to delete setting: %v", err)
 		msg := Message{"failed to delete setting"}
@@ -58,6 +63,8 @@ func removeSettingHandler(w http.ResponseWriter, req *http.Request, ps httproute
 func editSettingHandler(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	var s setting.Setting
 	json.NewDecoder(req.Body).Decode(&s)
+
+	setting.SetSetting(s, botIDAddress)
 
 	err := setting.UpdateSetting(connection.DB, s)
 	if err != nil {

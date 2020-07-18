@@ -2,7 +2,9 @@ package setting
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
+	"net/http"
 )
 
 type Setting struct {
@@ -10,6 +12,18 @@ type Setting struct {
 	Name     string `json:"name" db:"name"`
 	Interval int    `json:"interval" db:"interval"`
 	Checked  bool   `json:"checked" db:"checked"`
+}
+
+func GetSetting(db *sql.DB, id string) (Setting, error) {
+	var s Setting
+	query := "SELECT id, name, interval, checked FROM settings WHERE id = $1"
+	err := db.QueryRow(query, id).Scan(&s.ID, &s.Name, &s.Interval, &s.Checked)
+	if err != nil {
+		log.Printf("failed to get setting id=%d", id)
+		return s, err
+	}
+
+	return s, nil
 }
 
 func GetAllSettings(db *sql.DB) ([]Setting, error) {
@@ -69,4 +83,26 @@ func UpdateSetting(db *sql.DB, setting Setting) error {
 	}
 
 	return nil
+}
+
+func SetSetting(s Setting, botIDAddress map[string]string) {
+	for _, ip := range botIDAddress {
+		var URL string
+		if s.Checked {
+			URL = fmt.Sprintf("http://%s:10001/setting/activate/%s/%d", ip, s.ID, s.Interval)
+		} else {
+			URL = fmt.Sprintf("http://%s:10001/setting/deactivate/%s", ip, s.ID)
+		}
+
+		resp, err := http.Post(URL, "application/json", nil)
+		if err != nil {
+			log.Printf("failed to set setting=%v: %v", s, err)
+			continue
+		}
+		defer resp.Body.Close()
+
+		if resp.StatusCode != 200 {
+			log.Print("failed to set setting bot")
+		}
+	}
 }
