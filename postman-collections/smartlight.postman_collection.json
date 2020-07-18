@@ -33,7 +33,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:10000/lamp/get/1",
+							"raw": "localhost:10000/lamp/get/1:1",
 							"host": [
 								"localhost"
 							],
@@ -41,7 +41,7 @@
 							"path": [
 								"lamp",
 								"get",
-								"1"
+								"1:1"
 							]
 						}
 					},
@@ -54,7 +54,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Bathroom\",\r\n    \"total_lamp\": 1,\r\n    \"total_power\": 5,\r\n    \"image_name\": \"lamps/lamp-3.jpg\"\r\n}",
+							"raw": "{\r\n    \"id\": \"1:4\",\r\n    \"name\": \"Kitchen\",\r\n    \"total_lamp\": 1,\r\n    \"total_power\": 5,\r\n    \"image_name\": \"lamps/lamp-4.jpg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -88,7 +88,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"lamp_id\": 1,\r\n    \"name\": \"living room morning turn on\",\r\n    \"time\": \"05:00\",\r\n    \"turn_on\": true\r\n}",
+							"raw": "{\r\n    \"lamp_id\": \"1:1\",\r\n    \"name\": \"living room morning turn on\",\r\n    \"time\": \"05:00\",\r\n    \"turn_on\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -124,7 +124,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:10000/schedule/get/1",
+							"raw": "localhost:10000/schedule/get/1:1",
 							"host": [
 								"localhost"
 							],
@@ -132,7 +132,7 @@
 							"path": [
 								"schedule",
 								"get",
-								"1"
+								"1:1"
 							]
 						}
 					},
@@ -164,7 +164,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"living room morning turn off\",\r\n    \"time\": \"07:00\",\r\n    \"turn_on\": false\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"lamp_id\": \"1:1\",\r\n    \"name\": \"living room morning turn off\",\r\n    \"time\": \"07:00\",\r\n    \"turn_on\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -319,7 +319,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"lamp_id\": 1,\r\n    \"time\": \"2020-06-01T05:00:00Z\",\r\n    \"turn_on\": true\r\n}",
+							"raw": "{\r\n    \"lamp_id\": \"1:1\",\r\n    \"time\": \"2020-06-01T05:00:00Z\",\r\n    \"turn_on\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -346,7 +346,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:10000/usage/get/1",
+							"raw": "localhost:10000/usage/get/1:1",
 							"host": [
 								"localhost"
 							],
@@ -354,7 +354,7 @@
 							"path": [
 								"usage",
 								"get",
-								"1"
+								"1:1"
 							]
 						}
 					},
