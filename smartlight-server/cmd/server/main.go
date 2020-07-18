@@ -21,6 +21,8 @@ func main() {
 	}
 	defer connection.DB.Close()
 
+	go autoSync()
+
 	router := httprouter.New()
 	router.GET("/ping", func(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 		fmt.Fprint(w, "pong")
@@ -45,6 +47,6 @@ func main() {
 	router.POST("/usage/all", getAllUsagesHandler)
 	router.POST("/usage/add", addUsageHandler)
 
-	fmt.Println("Up and running")
+	log.Println("Up and running")
 	http.ListenAndServe(":10000", router)
 }
