@@ -45,6 +45,15 @@ func addSettingHandler(w http.ResponseWriter, req *http.Request, _ httprouter.Pa
 
 func removeSettingHandler(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	s, err := setting.GetSetting(connection.DB, ps.ByName("id"))
+	if err != nil {
+		log.Printf("failed to delete setting: %v", err)
+		msg := Message{"failed to delete setting"}
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(msg)
+		return
+	}
+
+	s.Checked = false
 	setting.SetSetting(s, botIDAddress)
 
 	err = setting.DeleteSetting(connection.DB, ps.ByName("id"))
