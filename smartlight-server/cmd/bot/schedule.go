@@ -66,8 +66,8 @@ func editSchedule(s schedule.Schedule) error {
 		return fmt.Errorf("lamp id=%s is not controlled by this bot", s.LampID)
 	}
 
-	if _, ok = schedules[s.ID]; !ok {
-		return fmt.Errorf("schedule id=%d has not been scheduled", s.ID)
+	if err := removeSchedule(s.ID); err != nil {
+		return err
 	}
 
 	job, err := scheduler.Every(1).Day().At(s.Time).Do(task, r, s)
