@@ -41,8 +41,10 @@ func GetLampUsages(db *sql.DB, lampID string) ([]Usage, error) {
 
 func GetAllUsages(db *sql.DB) ([]Usage, error) {
 	usages := []Usage{}
-	query := "SELECT id, lamp_id, time, turn_on FROM usages"
-	rows, err := db.Query(query)
+	upperBound := time.Now()
+	lowerBound := upperBound.AddDate(0, 0, -7)
+	query := "SELECT id, lamp_id, time, turn_on FROM usages WHERE time BETWEEN $1 AND $2"
+	rows, err := db.Query(query, lowerBound, upperBound)
 	if err != nil {
 		log.Print("failed to get all usages")
 		return nil, err
