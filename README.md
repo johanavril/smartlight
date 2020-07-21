@@ -12,6 +12,7 @@ This project was intended for automating lamp usage, but actually it is capable 
 + adjust the amount of relay input connected with the driver in the [code](smartlight-server/cmd/bot/main.go#L32)
 + set static IP on each bot (dynamic IP make it hard for server to determine the right address to communicate)
 + map the bot ID and static IP into the [code](smartlight-server/cmd/server/bot.go#L13)
++ match bot system timezone to [scheduler timezone](smartlight-server/cmd/bot/main.go#L25)
 
 ## Note
 
